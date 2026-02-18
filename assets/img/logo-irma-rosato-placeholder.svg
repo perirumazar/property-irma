@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="120" viewBox="0 0 520 120">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3aa6d8"></stop>
+      <stop offset="1" stop-color="#2bd4c7"></stop>
+    </linearGradient>
+  </defs>
+  <rect width="520" height="120" rx="34" fill="rgba(255,255,255,.75)" stroke="rgba(11,31,42,.10)"></rect>
+  <circle cx="70" cy="60" r="28" fill="url(#g)" opacity=".9"></circle>
+  <text x="110" y="70" font-size="34" font-family="system-ui, -apple-system, Segoe UI, Roboto" font-weight="900" fill="#0b1f2a">
+    Irma Rosato
+  </text>
+  <text x="110" y="95" font-size="16" font-family="system-ui, -apple-system, Segoe UI, Roboto" font-weight="700" fill="rgba(11,31,42,.65)">
+    Property Management
+  </text>
+</svg>

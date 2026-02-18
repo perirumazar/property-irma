@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contatti • Irma Rosato</title>
+  <meta name="description" content="Contatta Irma Rosato per una valutazione gratuita del tuo affitto breve." />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+
+<body>
+  <a class="skip-link" href="#main">Salta al contenuto</a>
+
+  <header class="site-header" data-header>
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Vai alla home">
+        <img
+          class="brand-logo"
+          src="assets/img/upper-irma-rosato.png"
+          alt="Irma Rosato Property Manager"
+          loading="eager"
+          decoding="async"
+        />
+      </a>
+
+      <nav class="nav" aria-label="Menu principale">
+        <button class="nav-toggle" type="button" aria-label="Apri menu" aria-expanded="false" data-nav-toggle>
+          <span class="nav-toggle-lines" aria-hidden="true"><span></span></span>
+        </button>
+
+        <div class="nav-links" data-nav-links>
+          <a href="index.html" aria-current="page">Home</a>
+          <a href="servizi.html">Servizi</a>
+          <a href="alloggi.html">Alloggi</a>
+          <a href="index.html#recensioni">Recensioni</a>
+          <a href="contatti.html" class="btn btn-small">Contattami</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb"><a href="index.html">Home</a> / Contatti</div>
+        <h1 class="section-title" style="margin:0;">Contatti</h1>
+        <p class="lead">
+          Dimmi che casa hai e cosa vuoi delegare. Anche due righe vanno bene: poi ti faccio io le domande giuste 🙂
+        </p>
+      </div>
+    </section>
+
+    <section id="form" class="section section-soft" style="padding-top:0;">
+      <div class="container">
+        <div class="section-head">
+          <h2 class="section-title">Scrivimi</h2>
+          <p class="section-subtitle">Form placeholder: lo colleghiamo a email/WhatsApp quando vuoi.</p>
+        </div>
+
+        <div class="contact-grid">
+          <form class="form" autocomplete="on">
+            <label class="field">
+              <span class="field-label">Nome</span>
+              <input class="field-input" type="text" name="name" placeholder="Come ti chiami?" required />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Email</span>
+              <input class="field-input" type="email" name="email" placeholder="nome@email.it" required />
+            </label>
+
+            <label class="field">
+              <span class="field-label">Messaggio</span>
+              <textarea class="field-input" name="message" rows="6" placeholder="Raccontami in breve la tua casa e cosa ti serve" required></textarea>
+            </label>
+
+            <button class="btn" type="submit">Invia</button>
+            <p class="form-note">Premendo “Invia” non succede nulla: è un placeholder.</p>
+          </form>
+
+          <aside class="contact-side">
+            <div class="contact-card">
+              <h3 class="contact-title">Irma Rosato</h3>
+              <p class="contact-text">
+                Property Manager • Costiera Amalfitana<br />
+                (Dati contatto placeholder)
+              </p>
+
+              <div class="contact-actions">
+                <a class="btn btn-ghost" href="#" aria-disabled="true">WhatsApp (placeholder)</a>
+                <a class="btn btn-ghost" href="#" aria-disabled="true">Email (placeholder)</a>
+              </div>
+
+              <div class="contact-mini">
+                <div class="mini">
+                  <div class="mini-k">Zona</div>
+                  <div class="mini-v">Maiori &amp; dintorni</div>
+                </div>
+                <div class="mini">
+                  <div class="mini-k">Disponibilità</div>
+                  <div class="mini-v">Nuove proprietà</div>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-left">
+        <div class="footer-brand">
+          <span class="brand-mark" aria-hidden="true">IR</span>
+          <div>
+            <div class="brand-name">Irma Rosato</div>
+            <div class="brand-sub">Property Manager</div>
+          </div>
+        </div>
+        <p class="footer-note">© <span id="year"></span> Irma Rosato • Tutti i diritti riservati</p>
+      </div>
+
+      <div class="footer-right">
+        <a href="privacy.html">Privacy</a>
+        <a href="cookie.html">Cookie</a>
+        <a href="contatti.html" aria-current="page">Contatti</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
