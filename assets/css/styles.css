@@ -1,5 +1,5 @@
 :root{
-  --bg:#f6fbff;
+  --bg:#ffffff;
   --surface:#ffffff;
   --surface-2:#ffffff;
   --text:#071a24;
@@ -18,7 +18,7 @@
   --radius-lg:28px;
 
   --container:1180px;
-  --header-h:76px;
+  --header-h:130px;
 }
 
 *,
@@ -61,11 +61,7 @@ a{color:inherit;text-decoration:none}
 
 .section{padding:96px 0}
 
-.section-soft{
-  background:#f1f7fb;
-  border-top:1px solid rgba(7,26,36,.08);
-  border-bottom:1px solid rgba(7,26,36,.08);
-}
+
 
 .section-head{
   text-align:center;
@@ -77,12 +73,6 @@ a{color:inherit;text-decoration:none}
   font-size:clamp(1.9rem,3vw,2.5rem);
   margin:0 0 12px;
   letter-spacing:-0.02em;
-}
-
-.section-subtitle{
-  color:var(--muted);
-  font-weight:650;
-  margin:0;
 }
 
 .site-header{
@@ -109,7 +99,7 @@ a{color:inherit;text-decoration:none}
 }
 
 .brand-logo{
-  height:42px;
+  height:100px;
   width:auto;
   max-width:220px;
   object-fit:contain;
@@ -183,8 +173,27 @@ a{color:inherit;text-decoration:none}
 
 .hero{
   position:relative;
-  padding:110px 0 90px;
   overflow:clip;
+  background-image:url("../img/bg-hero.webp");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(255,255,255,.58);
+  pointer-events:none;
+  z-index:0;
+}
+
+.hero > .container{
+  position:relative;
+  z-index:1;
 }
 
 .hero-inner{display:grid;gap:44px}
@@ -194,7 +203,7 @@ a{color:inherit;text-decoration:none}
 .hero-media{
   display:flex;
   width:100%;
-  max-width:980px;
+  max-width:600px;
   margin:0 auto;
   height:clamp(340px, 42vw, 520px);
   border-radius:var(--radius-lg);
@@ -212,9 +221,7 @@ a{color:inherit;text-decoration:none}
 }
 
 .hero-img{
-  width:100%;
-  height:100%;
-  display:block;
+width: 350px;  display:block;
 }
 
 .hero-img--logo{
@@ -240,11 +247,9 @@ a{color:inherit;text-decoration:none}
   max-width:920px;
   margin:0 auto;
   padding:44px;
-  border-radius:var(--radius-lg);
-  background:#ffffff;
-  border:1px solid var(--border);
-  box-shadow:var(--shadow);
   text-align:center;
+  position:relative;
+  z-index:1;
 }
 
 .hero-title{
