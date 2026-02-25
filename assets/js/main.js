@@ -48,9 +48,198 @@
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      alert("Form placeholder: quando vuoi lo colleghiamo a email/WhatsApp 🙂");
+      alert("Grazie! Messaggio ricevuto. Ti ricontattero presto.");
     });
   }
+
+  const initAlloggioGallery = () => {
+    const alloggioRoot = document.querySelector("[data-alloggio-folder]");
+    if (!alloggioRoot) return;
+
+    const folder = alloggioRoot.getAttribute("data-alloggio-folder");
+    if (!folder) return;
+
+    const heroEl = document.querySelector("[data-alloggio-hero]");
+    const track = document.querySelector("[data-alloggio-carousel-track]");
+    const thumbs = document.querySelector("[data-alloggio-thumbs]");
+    const dots = document.querySelector("[data-alloggio-dots]");
+    const prevBtn = document.querySelector("[data-alloggio-prev]");
+    const nextBtn = document.querySelector("[data-alloggio-next]");
+    if (!track || !thumbs || !prevBtn || !nextBtn) return;
+
+    const basePath = `assets/img/${folder}/`;
+    const exts = ["avif"];
+
+    const testImage = (url) =>
+      new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => resolve(true);
+        img.onerror = () => resolve(false);
+        img.src = url;
+      });
+
+    const findFirstAvailable = async (names) => {
+      for (const name of names) {
+        for (const ext of exts) {
+          const url = `${basePath}${name}.${ext}`;
+          // eslint-disable-next-line no-await-in-loop
+          if (await testImage(url)) return url;
+        }
+      }
+      return null;
+    };
+
+    const loadGalleryImages = async () => {
+      const found = [];
+      for (let i = 1; i <= 20; i += 1) {
+        const pad = String(i).padStart(2, "0");
+        // eslint-disable-next-line no-await-in-loop
+        const hit = await findFirstAvailable([pad, `foto-${pad}`, `foto${i}`, String(i)]);
+        if (!hit) {
+          if (i > 4 && found.length > 0) break;
+          continue;
+        }
+        found.push(hit);
+      }
+      if (found.length === 0) {
+        const fallback = await findFirstAvailable(["cover", "copertina", "hero"]);
+        if (fallback) found.push(fallback);
+      }
+      return found;
+    };
+
+    const openLightbox = (images, startAt) => {
+      let modal = document.querySelector("[data-media-lightbox]");
+      if (!modal) {
+        modal = document.createElement("div");
+        modal.className = "media-lightbox";
+        modal.setAttribute("data-media-lightbox", "true");
+        modal.innerHTML = `
+          <button class="media-lightbox-close" type="button" aria-label="Chiudi">×</button>
+          <button class="media-lightbox-nav media-lightbox-prev" type="button" aria-label="Foto precedente">‹</button>
+          <img class="media-lightbox-img" alt="Foto alloggio" />
+          <button class="media-lightbox-nav media-lightbox-next" type="button" aria-label="Foto successiva">›</button>
+        `;
+        document.body.appendChild(modal);
+      }
+
+      const imgEl = modal.querySelector(".media-lightbox-img");
+      const btnClose = modal.querySelector(".media-lightbox-close");
+      const btnPrev = modal.querySelector(".media-lightbox-prev");
+      const btnNext = modal.querySelector(".media-lightbox-next");
+
+      let current = startAt;
+      const update = () => {
+        imgEl.src = images[current];
+      };
+
+      const close = () => {
+        modal.classList.remove("is-open");
+        document.body.classList.remove("media-lightbox-open");
+        if (modal._keyHandler) {
+          document.removeEventListener("keydown", modal._keyHandler);
+          modal._keyHandler = null;
+        }
+      };
+
+      btnClose.onclick = close;
+      btnPrev.onclick = () => {
+        current = (current - 1 + images.length) % images.length;
+        update();
+      };
+      btnNext.onclick = () => {
+        current = (current + 1) % images.length;
+        update();
+      };
+      modal.onclick = (e) => {
+        if (e.target === modal) close();
+      };
+
+      modal._keyHandler = (e) => {
+        if (!modal.classList.contains("is-open")) return;
+        if (e.key === "Escape") close();
+        if (e.key === "ArrowLeft") btnPrev.click();
+        if (e.key === "ArrowRight") btnNext.click();
+      };
+      document.addEventListener("keydown", modal._keyHandler);
+
+      update();
+      modal.classList.add("is-open");
+      document.body.classList.add("media-lightbox-open");
+    };
+
+    const buildCarousel = async () => {
+      const cover = await findFirstAvailable(["cover", "copertina", "hero"]);
+      if (heroEl && cover) {
+        heroEl.style.backgroundImage = `linear-gradient(130deg, rgba(16,12,9,.62) 0%, rgba(16,12,9,.28) 55%, rgba(16,12,9,.5) 100%), url('${cover}')`;
+      }
+
+      const images = await loadGalleryImages();
+      if (images.length === 0) return;
+
+      let current = 0;
+      track.innerHTML = "";
+      thumbs.innerHTML = "";
+      if (dots) dots.innerHTML = "";
+
+      images.forEach((src, i) => {
+        const slide = document.createElement("button");
+        slide.type = "button";
+        slide.className = "alloggio-slide";
+        slide.setAttribute("aria-label", `Apri foto ${i + 1}`);
+        slide.innerHTML = `<img src="${src}" alt="Foto alloggio ${i + 1}" loading="lazy" decoding="async" />`;
+        slide.addEventListener("click", () => openLightbox(images, i));
+        track.appendChild(slide);
+
+        const thumb = document.createElement("button");
+        thumb.type = "button";
+        thumb.className = "alloggio-thumb";
+        thumb.innerHTML = `<img src="${src}" alt="Miniatura foto ${i + 1}" loading="lazy" decoding="async" />`;
+        thumb.addEventListener("click", () => {
+          current = i;
+          update();
+        });
+        thumbs.appendChild(thumb);
+
+        if (dots) {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "alloggio-dot";
+          dot.setAttribute("aria-label", `Vai alla foto ${i + 1}`);
+          dot.addEventListener("click", () => {
+            current = i;
+            update();
+          });
+          dots.appendChild(dot);
+        }
+      });
+
+      const update = () => {
+        track.style.transform = `translateX(-${current * 100}%)`;
+        const thumbBtns = thumbs.querySelectorAll(".alloggio-thumb");
+        thumbBtns.forEach((t, i) => t.classList.toggle("is-active", i === current));
+        if (dots) {
+          const dotBtns = dots.querySelectorAll(".alloggio-dot");
+          dotBtns.forEach((d, i) => d.classList.toggle("is-active", i === current));
+        }
+      };
+
+      prevBtn.addEventListener("click", () => {
+        current = (current - 1 + images.length) % images.length;
+        update();
+      });
+      nextBtn.addEventListener("click", () => {
+        current = (current + 1) % images.length;
+        update();
+      });
+
+      update();
+    };
+
+    buildCarousel();
+  };
+
+  initAlloggioGallery();
 
   const reduceMotion =
     window.matchMedia &&

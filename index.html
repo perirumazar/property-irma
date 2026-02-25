@@ -6,10 +6,6 @@
   <title>Irma Rosato • Property Manager</title>
   <meta name="description" content="Gestione case vacanza con cura vera. Irma Rosato, Property Manager." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800;900&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
@@ -22,7 +18,7 @@
       <a class="brand" href="index.html" aria-label="Vai alla home">
         <img
           class="brand-logo"
-          src="assets/img/upper-irma-rosato.png"
+          src="assets/img/logo-irma-rosato.png"
           alt="Irma Rosato Property Manager"
           loading="eager"
           decoding="async"
@@ -184,7 +180,7 @@
       <div class="container">
         <div class="section-head" data-aos="fade-up">
           <h2 class="section-title">Dicono di me</h2>
-          <p class="section-subtitle">Testi placeholder: li sostituiremo con recensioni reali.</p>
+          <p class="section-subtitle">Recensioni di proprietari e ospiti che hanno scelto una gestione professionale.</p>
         </div>
 
         <div class="testimonials">
@@ -244,11 +240,11 @@
       <div class="container">
         <div class="section-head" data-aos="fade-up">
           <h2 class="section-title">Contatti</h2>
-          <p class="section-subtitle">Form statico (placeholder). Se vuoi, lo colleghiamo a email/WhatsApp.</p>
+          <p class="section-subtitle">Compila il form oppure contattami direttamente su WhatsApp o Email.</p>
         </div>
 
         <div class="contact-grid">
-          <form class="form" autocomplete="on" data-aos="fade-up">
+          <form class="form" autocomplete="on" data-aos="fade-up" style="padding:20px">
             <label class="field">
               <span class="field-label">Nome</span>
               <input class="field-input" type="text" name="name" placeholder="Come ti chiami?" required />
@@ -265,7 +261,7 @@
             </label>
 
             <button class="btn" type="submit">Invia</button>
-            <p class="form-note">Premendo “Invia” non succede nulla: è un placeholder.</p>
+            <p class="form-note">Ti rispondo nel più breve tempo possibile con una prima valutazione.</p>
           </form>
 
           <aside class="contact-side" data-aos="fade-up" data-aos-delay="60">
@@ -273,12 +269,22 @@
               <h3 class="contact-title">Irma Rosato</h3>
               <p class="contact-text">
                 Property Manager • Costiera Amalfitana<br />
-                (Dati contatto placeholder)
+                Maiori &amp; dintorni
               </p>
 
               <div class="contact-actions">
-                <a class="btn btn-ghost" href="#" aria-disabled="true">WhatsApp (placeholder)</a>
-                <a class="btn btn-ghost" href="#" aria-disabled="true">Email (placeholder)</a>
+                <a class="contact-link contact-link--whatsapp" href="https://wa.me/393331234567" target="_blank" rel="noopener noreferrer" aria-label="Scrivi su WhatsApp">
+                  <span class="contact-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" role="img" aria-hidden="true"><path d="M20.52 3.48A11.79 11.79 0 0 0 12.12 0C5.64 0 .36 5.28.36 11.76c0 2.07.54 4.08 1.56 5.85L0 24l6.57-1.8a11.73 11.73 0 0 0 5.55 1.41h.01c6.48 0 11.76-5.28 11.76-11.76 0-3.14-1.22-6.09-3.37-8.37ZM12.13 21.6h-.01a9.73 9.73 0 0 1-4.95-1.35l-.35-.21-3.9 1.07 1.04-3.8-.23-.39a9.74 9.74 0 0 1-1.49-5.16c0-5.38 4.38-9.76 9.77-9.76 2.61 0 5.06 1.01 6.91 2.85a9.68 9.68 0 0 1 2.86 6.91c0 5.39-4.38 9.77-9.75 9.77Zm5.36-7.33c-.29-.15-1.73-.85-2-.94-.27-.1-.47-.15-.67.15-.2.29-.77.94-.94 1.13-.17.2-.35.22-.64.07-.29-.15-1.23-.45-2.34-1.43-.86-.77-1.44-1.73-1.61-2.02-.17-.29-.02-.44.13-.58.13-.13.29-.35.44-.52.15-.17.2-.29.3-.49.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.48-.5-.67-.5h-.57c-.2 0-.52.07-.79.37-.27.29-1.04 1.02-1.04 2.5 0 1.47 1.07 2.89 1.22 3.09.15.2 2.1 3.21 5.09 4.49.71.31 1.26.49 1.69.63.71.23 1.35.2 1.86.12.57-.08 1.73-.71 1.97-1.4.24-.69.24-1.28.17-1.4-.08-.12-.27-.2-.57-.35Z"/></svg>
+                  </span>
+                  WhatsApp
+                </a>
+                <a class="contact-link contact-link--email" href="mailto:hello@irmaproperty.it" aria-label="Invia una email">
+                  <span class="contact-link-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="currentColor" role="img" aria-hidden="true"><path d="M2.25 5.25A2.25 2.25 0 0 1 4.5 3h15a2.25 2.25 0 0 1 2.25 2.25v13.5A2.25 2.25 0 0 1 19.5 21h-15a2.25 2.25 0 0 1-2.25-2.25V5.25Zm2.67-.75 7.08 6.09 7.08-6.09H4.92ZM20.25 6.48l-7.27 6.25a1.5 1.5 0 0 1-1.96 0L3.75 6.48v12.27c0 .41.34.75.75.75h15a.75.75 0 0 0 .75-.75V6.48Z"/></svg>
+                  </span>
+                  hello@irmaproperty.it
+                </a>
               </div>
 
               <div class="contact-mini">
