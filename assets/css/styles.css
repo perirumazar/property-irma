@@ -1180,7 +1180,31 @@ ul {
   }
 
   .hero-title {
-    font-size: clamp(1.8rem, 10vw, 2.4rem);
+    font-size: clamp(1.38rem, 6.6vw, 1.78rem);
+    line-height: 1.16;
+  }
+
+  .hero-lead {
+    font-size: 0.94rem;
+    max-width: 34ch;
+  }
+
+  .section-title {
+    font-size: clamp(1.34rem, 6.1vw, 1.72rem);
+    line-height: 1.15;
+  }
+
+  .card-title,
+  .cta-title,
+  .contact-title,
+  .step-title,
+  .highlight-title {
+    font-size: 1.06rem;
+    line-height: 1.24;
+  }
+
+  .rating-score {
+    font-size: 1.9rem;
   }
 }
 
