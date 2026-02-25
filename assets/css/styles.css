@@ -250,12 +250,12 @@ a {
 .hero-card {
   max-width: 920px;
   margin: 0 auto;
-  padding: clamp(26px, 3.8vw, 54px);
+  padding: clamp(8px, 2.2vw, 18px);
   text-align: center;
-  border-radius: var(--radius-lg);
-  background: rgba(255, 251, 245, 0.9);
-  border: 1px solid rgba(181, 139, 93, 0.34);
-  box-shadow: var(--shadow);
+  border-radius: 0;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .hero-title {
@@ -265,14 +265,17 @@ a {
   line-height: 1.08;
   letter-spacing: 0.01em;
   text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
 }
 
 .hero-lead {
   margin: 0 auto 28px;
   max-width: 66ch;
-  color: #5f5146;
+  color: rgba(255, 255, 255, 0.92);
   font-weight: 600;
   font-size: 1.04rem;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.32);
 }
 
 .hero-cta,
