@@ -199,6 +199,7 @@ a {
   display: none;
   width: 46px;
   height: 42px;
+  padding: 0;
   border: 1px solid var(--border);
   border-radius: 10px;
   background: #fff;
@@ -241,10 +242,21 @@ a {
 .hero {
   position: relative;
   overflow: clip;
-  background:
-    linear-gradient(rgba(17, 13, 9, 0.48), rgba(17, 13, 9, 0.4)),
-    url("../img/bg-hero.webp") center/cover no-repeat;
+  background: url("../img/bg-hero.webp") center/cover no-repeat;
   padding: 128px 0 110px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 13, 9, 0.58);
+  pointer-events: none;
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-card {
@@ -701,6 +713,30 @@ textarea.field-input {
   padding: 48px 0 24px;
 }
 
+.page-hero--contact {
+  padding: 56px 0 34px;
+}
+
+.page-hero--contact .section-title {
+  margin: 0 0 12px;
+}
+
+.page-hero--contact .lead {
+  margin: 0;
+}
+
+.contact-form-section {
+  padding-top: 24px;
+}
+
+.contact-section-head {
+  margin-bottom: 38px;
+}
+
+.contact-page-form {
+  gap: 16px;
+}
+
 .page-hero-alloggio {
   padding-top: 30px;
 }
@@ -1108,6 +1144,18 @@ ul {
     overflow: visible;
   }
 
+  .page-hero--contact {
+    padding: 44px 0 26px;
+  }
+
+  .contact-form-section {
+    padding-top: 14px;
+  }
+
+  .contact-section-head {
+    margin-bottom: 30px;
+  }
+
   .cta-inner {
     flex-direction: column;
     align-items: flex-start;
@@ -1128,6 +1176,7 @@ ul {
 
   .nav-toggle {
     display: grid;
+    place-items: center;
   }
 
   .nav-links {
@@ -1152,7 +1201,17 @@ ul {
     width: 100%;
     background: #fff;
     border: 1px solid rgba(61, 47, 35, 0.14);
+    color: #2a1f16;
+    box-shadow: none;
     text-align: center;
+  }
+
+  .nav-links a.btn,
+  .nav-links a.btn-small {
+    background: #fff;
+    border: 1px solid rgba(61, 47, 35, 0.14);
+    color: #2a1f16;
+    box-shadow: none;
   }
 
   .nav-links.is-open {

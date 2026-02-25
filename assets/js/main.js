@@ -336,3 +336,72 @@
     }
   }
 })();
+(function () {
+  const form = document.getElementById("contactForm");
+  if (!form) return;
+
+  const statusEl = document.getElementById("formStatus");
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/mlgwaqpe";
+
+  function setStatus(message, isError) {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.style.color = isError ? "crimson" : "inherit";
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const gotcha = form.querySelector('input[name="_gotcha"]');
+    if (gotcha && gotcha.value.trim().length > 0) {
+      form.reset();
+      setStatus("Messaggio inviato. Grazie!", false);
+      return;
+    }
+
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.setAttribute("aria-busy", "true");
+    }
+    setStatus("Invio in corso…", false);
+
+    try {
+      const formData = new FormData(form);
+
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (res.ok) {
+        form.reset();
+        setStatus("Messaggio inviato! Ti risponderò al più presto.", false);
+      } else {
+        let data = null;
+        try { data = await res.json(); } catch (_) {}
+        const msg =
+          data && data.errors && data.errors.length
+            ? data.errors.map((x) => x.message).join(" • ")
+            : "Errore durante l’invio. Riprova tra poco o scrivimi via email.";
+        setStatus(msg, true);
+      }
+    } catch (err) {
+      setStatus("Connessione non disponibile. Riprova o usa WhatsApp/email.", true);
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.removeAttribute("aria-busy");
+      }
+    }
+  });
+})();
