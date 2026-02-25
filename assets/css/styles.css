@@ -141,16 +141,23 @@ a {
 }
 
 .brand-mark {
-  width: 42px;
-  height: 42px;
+  width: 56px;
+  height: 56px;
   border-radius: 12px;
   display: grid;
   place-items: center;
   font-weight: 800;
   letter-spacing: 0.05em;
   color: #fff;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  background: linear-gradient(135deg, #7b593a, #4b3320);
   box-shadow: var(--shadow-sm);
+}
+
+.brand-mark-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
 }
 
 .brand-name {
