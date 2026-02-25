@@ -61,6 +61,7 @@
 
     const heroEl = document.querySelector("[data-alloggio-hero]");
     const track = document.querySelector("[data-alloggio-carousel-track]");
+    const viewport = track ? track.closest(".alloggio-carousel-viewport") : null;
     const thumbs = document.querySelector("[data-alloggio-thumbs]");
     const dots = document.querySelector("[data-alloggio-dots]");
     const prevBtn = document.querySelector("[data-alloggio-prev]");
@@ -106,6 +107,71 @@
         if (fallback) found.push(fallback);
       }
       return found;
+    };
+
+    const addSwipeNavigation = (el, onPrev, onNext, onSwipe) => {
+      if (!el) return;
+
+      const threshold = 46;
+      let startX = 0;
+      let startY = 0;
+      let deltaX = 0;
+      let deltaY = 0;
+      let tracking = false;
+      let lockedAxis = null;
+      let swiped = false;
+
+      const onTouchStart = (e) => {
+        if (!e.touches || e.touches.length !== 1) return;
+        const t = e.touches[0];
+        startX = t.clientX;
+        startY = t.clientY;
+        deltaX = 0;
+        deltaY = 0;
+        tracking = true;
+        lockedAxis = null;
+        swiped = false;
+      };
+
+      const onTouchMove = (e) => {
+        if (!tracking || !e.touches || e.touches.length !== 1) return;
+        const t = e.touches[0];
+        deltaX = t.clientX - startX;
+        deltaY = t.clientY - startY;
+
+        if (!lockedAxis) {
+          if (Math.abs(deltaX) > 8 || Math.abs(deltaY) > 8) {
+            lockedAxis = Math.abs(deltaX) > Math.abs(deltaY) ? "x" : "y";
+          }
+        }
+
+        if (lockedAxis === "x") {
+          e.preventDefault();
+        }
+      };
+
+      const onTouchEnd = () => {
+        if (!tracking) return;
+        tracking = false;
+
+        if (lockedAxis === "x" && Math.abs(deltaX) >= threshold) {
+          if (deltaX < 0) onNext();
+          else onPrev();
+          swiped = true;
+          if (typeof onSwipe === "function") onSwipe();
+        }
+      };
+
+      const onTouchCancel = () => {
+        tracking = false;
+      };
+
+      el.addEventListener("touchstart", onTouchStart, { passive: true });
+      el.addEventListener("touchmove", onTouchMove, { passive: false });
+      el.addEventListener("touchend", onTouchEnd, { passive: true });
+      el.addEventListener("touchcancel", onTouchCancel, { passive: true });
+
+      return () => swiped;
     };
 
     const openLightbox = (images, startAt) => {
@@ -163,6 +229,11 @@
       };
       document.addEventListener("keydown", modal._keyHandler);
 
+      if (!modal._swipeReady) {
+        addSwipeNavigation(imgEl, () => btnPrev.click(), () => btnNext.click());
+        modal._swipeReady = true;
+      }
+
       update();
       modal.classList.add("is-open");
       document.body.classList.add("media-lightbox-open");
@@ -178,6 +249,7 @@
       if (images.length === 0) return;
 
       let current = 0;
+      let suppressSlideClick = false;
       track.innerHTML = "";
       thumbs.innerHTML = "";
       if (dots) dots.innerHTML = "";
@@ -188,7 +260,13 @@
         slide.className = "alloggio-slide";
         slide.setAttribute("aria-label", `Apri foto ${i + 1}`);
         slide.innerHTML = `<img src="${src}" alt="Foto alloggio ${i + 1}" loading="lazy" decoding="async" />`;
-        slide.addEventListener("click", () => openLightbox(images, i));
+        slide.addEventListener("click", () => {
+          if (suppressSlideClick) {
+            suppressSlideClick = false;
+            return;
+          }
+          openLightbox(images, i);
+        });
         track.appendChild(slide);
 
         const thumb = document.createElement("button");
@@ -232,6 +310,24 @@
         current = (current + 1) % images.length;
         update();
       });
+
+      addSwipeNavigation(
+        viewport,
+        () => {
+          current = (current - 1 + images.length) % images.length;
+          update();
+        },
+        () => {
+          current = (current + 1) % images.length;
+          update();
+        },
+        () => {
+          suppressSlideClick = true;
+          window.setTimeout(() => {
+            suppressSlideClick = false;
+          }, 240);
+        },
+      );
 
       update();
     };
