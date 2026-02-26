@@ -271,7 +271,7 @@ a {
 }
 
 .hero-card {
-  max-width: 920px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: clamp(8px, 2.2vw, 18px);
   text-align: center;
@@ -287,17 +287,16 @@ a {
   font-size: clamp(2.3rem, 4vw, 3.4rem);
   line-height: 1.08;
   letter-spacing: 0.01em;
-  text-transform: uppercase;
   color: #fff;
   text-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
 }
 
 .hero-lead {
   margin: 0 auto 28px;
-  max-width: 66ch;
+  max-width: 800px;
   color: rgba(255, 255, 255, 0.92);
   font-weight: 600;
-  font-size: 1.04rem;
+  font-size: 1.1rem;
   text-shadow: 0 4px 18px rgba(0, 0, 0, 0.32);
 }
 
@@ -349,7 +348,6 @@ a {
   color: #fff;
   padding: 13px 20px;
   font-size: 0.84rem;
-  text-transform: uppercase;
   letter-spacing: 0.12em;
   font-weight: 800;
   transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
