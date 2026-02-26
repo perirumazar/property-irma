@@ -362,6 +362,14 @@
   let lenis = null;
   if (!reduceMotion && window.Lenis) {
     try {
+      const headerEl = document.querySelector("[data-header]");
+      const getAnchorDestination = (target) => {
+        const headerHeight = headerEl ? Math.round(headerEl.getBoundingClientRect().height) : 0;
+        const topGap = headerHeight + 0;
+        const targetTop = window.scrollY + target.getBoundingClientRect().top;
+        return Math.max(0, targetTop - topGap);
+      };
+
       lenis = new Lenis({
         duration: 1.05,
         smoothWheel: true,
@@ -377,11 +385,12 @@
       document.querySelectorAll('a[href^="#"]').forEach((a) => {
         a.addEventListener("click", (e) => {
           const href = a.getAttribute("href");
-          const target = href && document.querySelector(href);
+          if (!href || href === "#") return;
+          const target = document.querySelector(href);
           if (!target) return;
           e.preventDefault();
           closeNav();
-          lenis.scrollTo(target, { offset: -88 });
+          lenis.scrollTo(getAnchorDestination(target));
         });
       });
     } catch (_) {}
@@ -501,3 +510,4 @@
     }
   });
 })();
+

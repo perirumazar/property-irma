@@ -29,6 +29,10 @@ html {
   scroll-behavior: smooth;
 }
 
+[id] {
+  scroll-margin-top: calc(var(--header-h) + 0px);
+}
+
 body {
   margin: 0;
   font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif;
@@ -1308,3 +1312,4 @@ html.aos-on [data-aos].aos-animate {
   opacity: 1 !important;
   transform: none !important;
 }
+
