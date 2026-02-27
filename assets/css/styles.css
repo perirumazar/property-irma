@@ -458,6 +458,38 @@ a {
   gap: 16px;
 }
 
+.about-grid {
+  max-width: 980px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.about-media {
+  display: flex;
+  justify-content: center;
+}
+
+.about-photo {
+  width: min(300px, 72vw);
+  aspect-ratio: 1/1;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: center;
+  border: 4px solid rgba(181, 139, 93, 0.26);
+  box-shadow: var(--shadow-sm);
+}
+
+.about-content .section-title {
+  margin-bottom: 14px;
+}
+
+.about-content .lead {
+  max-width: 58ch;
+}
+
 .step {
   list-style: none;
   display: grid;
@@ -1136,6 +1168,7 @@ ul {
 
   .cards-grid,
   .testimonials,
+  .about-grid,
   .contact-grid,
   .alloggio-grid,
   .highlights-grid,
@@ -1308,4 +1341,3 @@ html.aos-on [data-aos].aos-animate {
   opacity: 1 !important;
   transform: none !important;
 }
-
