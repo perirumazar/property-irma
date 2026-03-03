@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /404.html
+Disallow: /alloggio.html
+
+Sitemap: https://www.irmarosato.it/sitemap.xml
