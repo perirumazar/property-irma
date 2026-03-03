@@ -480,8 +480,6 @@ a {
   border-radius: 16px;
   object-fit: cover;
   object-position: center top;
-  border: 4px solid rgba(181, 139, 93, 0.26);
-  box-shadow: var(--shadow-sm);
 }
 
 .about-content .section-title {
@@ -1509,7 +1507,6 @@ ul {
   .about-photo {
     width: min(100%, 420px);
     aspect-ratio: 1 / 1;
-    object-position: center;
     border-width: 3px;
     border-radius: 14px;
   }
